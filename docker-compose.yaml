@@ -10,6 +10,8 @@ services:
     image: erkansirin78/kafka:3.2.0
     build: 
       context: .
+    environment:
+      - KAFKA_CLUSTER_ID=EP6hyiddQNW5FPrAvR9kWw
     ports:
         - "9092:9092"
     networks:
@@ -23,6 +25,8 @@ services:
     image: erkansirin78/kafka:3.2.0
     build: 
       context: .
+    environment:
+      - KAFKA_CLUSTER_ID=EP6hyiddQNW5FPrAvR9kWw
     ports:
         - "9292:9092"
     networks:
@@ -36,6 +40,8 @@ services:
     image: erkansirin78/kafka:3.2.0
     build: 
       context: .
+    environment:
+      - KAFKA_CLUSTER_ID=EP6hyiddQNW5FPrAvR9kWw
     ports:
         - "9392:9092"
     networks:
