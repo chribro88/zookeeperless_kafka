@@ -10,6 +10,8 @@ services:
     image: erkansirin78/kafka:3.2.0
     build: 
       context: .
+      args:
+        - NODE=kafka1
     environment:
       - KAFKA_CLUSTER_ID=EP6hyiddQNW5FPrAvR9kWw
     ports:
@@ -25,6 +27,8 @@ services:
     image: erkansirin78/kafka:3.2.0
     build: 
       context: .
+      args:
+        - NODE=kafka2
     environment:
       - KAFKA_CLUSTER_ID=EP6hyiddQNW5FPrAvR9kWw
     ports:
@@ -40,6 +44,8 @@ services:
     image: erkansirin78/kafka:3.2.0
     build: 
       context: .
+      args:
+        - NODE=kafka3
     environment:
       - KAFKA_CLUSTER_ID=EP6hyiddQNW5FPrAvR9kWw
     ports:
