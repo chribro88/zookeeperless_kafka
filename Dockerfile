@@ -1,4 +1,5 @@
 FROM openjdk:11.0.10-jre-buster
+ARG DEBUG
 
 RUN apt-get update && \
     apt-get install -y curl
