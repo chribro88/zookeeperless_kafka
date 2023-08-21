@@ -2,6 +2,12 @@ FROM openjdk:11.0.10-jre-buster
 
 RUN apt-get update && \
     apt-get install -y curl
+
+RUN if [ "$DEBUG" = "1" ]; then \
+    apt-get install -y \
+        net-tools \
+        && apt-get clean; \
+    fi
          
 ENV KAFKA_VERSION 3.5.1
 ENV SCALA_VERSION 2.13 
