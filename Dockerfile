@@ -19,5 +19,7 @@ COPY ./config/server.properties.template /kafka/config/server.properties.templat
 
 RUN chmod +x  /usr/bin/start-kafka.sh
 
+EXPOSE 9092 9093
+
 CMD ["start-kafka.sh"]
 
