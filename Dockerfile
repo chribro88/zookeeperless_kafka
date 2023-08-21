@@ -1,7 +1,5 @@
 FROM openjdk:11.0.10-jre-buster
 
-ARG NODE=kafka1
-
 RUN apt-get update && \
     apt-get install -y curl
          
@@ -17,7 +15,7 @@ RUN  mkdir /tmp/kafka && \
 RUN mkdir -p /data/kafka
 
 COPY start-kafka.sh  /usr/bin
-COPY ./config/$NODE/server.properties /kafka/config/server.properties
+COPY ./config/server.properties.template /kafka/config/server.properties.template
 
 RUN chmod +x  /usr/bin/start-kafka.sh
 
