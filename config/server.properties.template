@@ -140,5 +140,5 @@ delete.topic.enable=true
 
 #################################  Custom Propertied Added by cb ###########################
 auto.create.topics.enable={{KAFKA_AUTO_TOPIC_CREATION_ENABLE}}
-min.insync.replicas={{MIN_IN_SYNC_REPLICAS}}
-default.replication.factor={{DEFAULT_REPLICATION_FACTOR}}
+#min.insync.replicas={{MIN_IN_SYNC_REPLICAS}}
+#default.replication.factor={{DEFAULT_REPLICATION_FACTOR}}
