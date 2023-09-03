@@ -8,7 +8,9 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{KAFKA_LISTENERS}}|${KAFKA_LISTENERS:-PLAINTEXT://tasks.$HOSTNAME:9192,CONTROLLER://tasks.$HOSTNAME:9093,LISTENER_DOCKER_EXTERNAL://0.0.0.0:9092}|g" \
   -e "s|{{KAFKA_ADVERTISED_LISTENERS}}|${KAFKA_ADVERTISED_LISTENERS:-PLAINTEXT://tasks.$HOSTNAME:9192,LISTENER_DOCKER_EXTERNAL://$IP:9092}|g" \
   -e "s|{{KAFKA_AUTO_TOPIC_CREATION_ENABLE}}|${KAFKA_AUTO_TOPIC_CREATION_ENABLE:-false}|g" \
-  -e "s|{{KAFKA_NUM_PARTITIONS}}|${KAFKA_NUM_PARTITIONS:-18}|g" \
+  -e "s|{{KAFKA_NUM_PARTITIONS}}|${KAFKA_NUM_PARTITIONS:-1}|g" \
+  -e "s|{{MIN_IN_SYNC_REPLICAS}}|${MIN_IN_SYNC_REPLICAS:-1}|g" \
+  -e "s|{{DEFAULT_REPLICATION_FACTOR}}|${DEFAULT_REPLICATION_FACTOR:-1}|g" \
    > /kafka/config/server.properties
    
 /kafka/bin/kafka-storage.sh format --config /kafka/config/server.properties --cluster-id "$KAFKA_CLUSTER_ID" --ignore-formatted
