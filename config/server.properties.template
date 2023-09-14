@@ -21,7 +21,7 @@
 ############################# Server Basics #############################
 
 # The role of this server. Setting this puts us in KRaft mode
-process.roles=broker,controller
+process.roles={{KAFKA_PROCESS_ROLES}}
 
 # The node id associated with this instance's roles
 node.id={{KAFKA_NODE_ID}}
@@ -140,3 +140,4 @@ delete.topic.enable=true
 
 #################################  Custom Propertied Added by cb ###########################
 auto.create.topics.enable={{KAFKA_AUTO_TOPIC_CREATION_ENABLE}}
+metadata.log.dir={{KAFKA_METADATA_LOG_DIR}}
