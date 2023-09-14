@@ -49,7 +49,7 @@ inter.broker.listener.name=PLAINTEXT
 # Listener name, hostname and port the broker will advertise to clients.
 # If not set, it uses the value for "listeners".
 #advertised.listeners=PLAINTEXT://kafka1:9192,LISTENER_DOCKER_EXTERNAL://250.74.132.4:9092
-advertised.listeners={{KAFKA_ADVERTISED_LISTENERS}}
+{{KAFKA_ADVERTISED_LISTENERS_COMMENT}}advertised.listeners={{KAFKA_ADVERTISED_LISTENERS}}
 
 # A comma-separated list of the names of the listeners used by the controller.
 # If no explicit mapping set in `listener.security.protocol.map`, default will be using PLAINTEXT protocol
