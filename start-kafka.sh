@@ -19,6 +19,8 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{KAFKA_ADVERTISED_LISTENERS}}|${KAFKA_ADVERTISED_LISTENERS:-PLAINTEXT://$LISTEN_NAME:9192,LISTENER_DOCKER_EXTERNAL://$IP:9092}|g" \
   -e "s|{{KAFKA_AUTO_TOPIC_CREATION_ENABLE}}|${KAFKA_AUTO_TOPIC_CREATION_ENABLE:-false}|g" \
   -e "s|{{KAFKA_NUM_PARTITIONS}}|${KAFKA_NUM_PARTITIONS:-1}|g" \
+  -e "s|{{KAFKA_PROCESS_ROLES}}|${KAFKA_PROCESS_ROLES:-broker,controller}|g" \
+  -e "s|{{KAFKA_METADATA_LOG_DIR}}|${KAFKA_METADATA_LOG_DIR:-/data/kafka}|g" \
    > /kafka/config/server.properties
    
 /kafka/bin/kafka-storage.sh format --config /kafka/config/server.properties --cluster-id "$KAFKA_CLUSTER_ID" --ignore-formatted
