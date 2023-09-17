@@ -4,13 +4,22 @@ IP=$(grep "\s${HOSTNAME}$" /etc/hosts | head -n 1 | awk '{print $1}')
 
 LISTEN_NAME="${HOSTNAME}"
 
-if [ "$TASKS" = "true" ]; then
-  LISTEN_NAME="tasks.$LISTEN_NAME"
-fi
+for var in $(env | grep '^SWARM_NODE_ID_'); do
+    # Split the variable into name and value
+    IFS='=' read -r name value <<< "$var"
+    # Check if the value equals the hostname
+    if [ "$value" == "$SWARM_NODE_ID" ]; then
+        # Set NODE_ID
+        suffix=$(echo "$name" | sed 's/SWARM_NODE_ID_//')
+        export NODE_ID="$suffix"
 
-if [ -n "$NETWORK_NAME" ]; then
-    LISTEN_NAME="$LISTEN_NAME.$NETWORK_NAME"
-fi
+        # Print the result (optional)
+        echo "NODE_ID set to $NODE_ID"
+        
+        # Exit the loop
+        break
+    fi
+done
 
 if [ "$KAFKA_PROCESS_ROLES" = "controller" ]; then
   KAFKA_ADVERTISED_LISTENERS_COMMENT="#"
@@ -30,9 +39,6 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{KAFKA_NUM_PARTITIONS}}|${KAFKA_NUM_PARTITIONS:-1}|g" \
   -e "s|{{KAFKA_PROCESS_ROLES}}|${KAFKA_PROCESS_ROLES:-broker,controller}|g" \
   -e "s|{{KAFKA_METADATA_LOG_DIR}}|${KAFKA_METADATA_LOG_DIR:-/data/kafka}|g" \
-  -e "s|{{KAFKA_BROKER_RACK}}|${KAFKA_BROKER_RACK}|g" \
    > /kafka/config/server.properties
    
 /kafka/bin/kafka-storage.sh format --config /kafka/config/server.properties --cluster-id "$KAFKA_CLUSTER_ID" --ignore-formatted
-
-/kafka/bin/kafka-server-start.sh /kafka/config/server.properties
