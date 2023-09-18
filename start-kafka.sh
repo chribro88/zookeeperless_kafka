@@ -5,16 +5,17 @@ IP=$(grep "\s${HOSTNAME}$" /etc/hosts | head -n 1 | awk '{print $1}')
 LISTEN_NAME="${HOSTNAME}"
 
 for var in $(env | grep '^SWARM_NODE_ID_'); do
+    echo "$var"
     # Split the variable into name and value
     IFS='=' read -r name value <<< "$var"
     # Check if the value equals the hostname
     if [ "$value" == "$SWARM_NODE_ID" ]; then
         # Set NODE_ID
         suffix=$(echo "$name" | sed 's/SWARM_NODE_ID_//')
-        export NODE_ID="$suffix"
+        export KAFKA_NODE_ID="$suffix"
 
         # Print the result (optional)
-        echo "NODE_ID set to $NODE_ID"
+        echo "NODE_ID set to $KAFKA_NODE_ID"
         
         # Exit the loop
         break
