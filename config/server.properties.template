@@ -141,4 +141,4 @@ delete.topic.enable=true
 #################################  Custom Propertied Added by cb ###########################
 auto.create.topics.enable={{KAFKA_AUTO_TOPIC_CREATION_ENABLE}}
 metadata.log.dir={{KAFKA_METADATA_LOG_DIR}}
-broker.rack={{KAFKA_BROKER_RACK}}
+#broker.rack={{KAFKA_BROKER_RACK}}
